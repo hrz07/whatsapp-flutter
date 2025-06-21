@@ -19,6 +19,7 @@ class ChatInboxScreen extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: const Color.fromARGB(255, 252, 253, 252),
         title: Row(
           children: [
             const CircleAvatar(child: Icon(Icons.person)),
@@ -35,49 +36,54 @@ class ChatInboxScreen extends StatelessWidget {
           SizedBox(width: 8),
         ],
       ),
-      body: Column(
-        children: [
-          const Padding(
-            padding: EdgeInsets.symmetric(vertical: 8),
-            child: Text("Today", style: TextStyle(color: Colors.grey)),
-          ),
-          Expanded(
-            child: ListView.builder(
-              padding: const EdgeInsets.symmetric(horizontal: 12),
-              itemCount: messages.length,
-              itemBuilder: (context, index) {
-                final msg = messages[index];
-                final isMe = msg['isMe'] as bool;
-                return Align(
-                  alignment: isMe ? Alignment.centerRight : Alignment.centerLeft,
-                  child: Container(
-                    margin: const EdgeInsets.symmetric(vertical: 4),
-                    padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
-                    decoration: BoxDecoration(
-                      color: isMe ? Colors.green[100] : Colors.white,
-                      borderRadius: BorderRadius.circular(12),
-                    ),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.end,
-                      children: [
-                        Text(
-                          msg['text'] as String,
-                          style: const TextStyle(fontSize: 16),
-                        ),
-                        Text(
-                          msg['time'] as String,
-                          style: const TextStyle(fontSize: 10, color: Colors.grey),
-                        ),
-                      ],
-                    ),
-                  ),
-                );
-              },
+      body: Container(
+        decoration: const BoxDecoration(
+          color: Color.fromARGB(255, 239, 240, 239),
+        ),
+        child: Column(
+          children: [
+            const Padding(
+              padding: EdgeInsets.symmetric(vertical: 8),
+              child: Text("Today", style: TextStyle(color: Colors.grey)),
             ),
-          ),
-          const Divider(height: 1),
-          _buildMessageInput(),
-        ],
+            Expanded(
+              child: ListView.builder(
+                padding: const EdgeInsets.symmetric(horizontal: 12),
+                itemCount: messages.length,
+                itemBuilder: (context, index) {
+                  final msg = messages[index];
+                  final isMe = msg['isMe'] as bool;
+                  return Align(
+                    alignment: isMe ? Alignment.centerRight : Alignment.centerLeft,
+                    child: Container(
+                      margin: const EdgeInsets.symmetric(vertical: 4),
+                      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+                      decoration: BoxDecoration(
+                        color: isMe ? Colors.green[100] : Colors.white,
+                        borderRadius: BorderRadius.circular(12),
+                      ),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.end,
+                        children: [
+                          Text(
+                            msg['text'] as String,
+                            style: const TextStyle(fontSize: 16),
+                          ),
+                          Text(
+                            msg['time'] as String,
+                            style: const TextStyle(fontSize: 10, color: Colors.grey),
+                          ),
+                        ],
+                      ),
+                    ),
+                  );
+                },
+              ),
+            ),
+            const Divider(height: 1),
+            _buildMessageInput(),
+          ],
+        ),
       ),
     );
   }
