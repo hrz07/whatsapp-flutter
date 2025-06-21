@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:whatsapp/modules/chat/dummy-data/dummy_chat_list.dart';
+import 'package:whatsapp/modules/inbox/pages/chat_inbox_screen.dart';
 
 class ChatsTab extends StatelessWidget {
   const ChatsTab({super.key});
@@ -18,7 +19,12 @@ class ChatsTab extends StatelessWidget {
           subtitle: Text(chat['message']!),
           trailing: Text(chat['time']!, style: const TextStyle(fontSize: 12)),
           onTap: () {
-            debugPrint('Tapped on ${chat['name']}');
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (_) => ChatInboxScreen(name: chat['name']!),
+              ),
+            );
           },
         );
       },
